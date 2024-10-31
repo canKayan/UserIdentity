@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+@Html.AntiForgeryToken()
+<h2>Home</h2>
+<label class="label label-info">
+    @User.Identity.Name
+</label>
+<hr />
+
+@if(User.Identity.IsAuthenticated)
+{
+
+    <a href="~/Account/Logout" class="btn btn-danger">Logout</a>
+    <a href="/RoleAdmin/Index" class="btn btn-primary">Roles</a>   
+}
+else
+{
+<a href="/Account/Login" class="btn btn-success">Login</a>   
+<a href="/Account/Register" class="btn btn-primary">Register</a>   
+}

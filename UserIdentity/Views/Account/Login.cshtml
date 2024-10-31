@@ -1,0 +1,44 @@
+﻿@model UserIdentity.Models.LoginModel
+
+@using System.Linq.Expressions
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2> </h2>
+<h2>Login</h2>
+
+<hr />
+
+@Html.ValidationSummary()
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+
+    <div class="form-group">
+        <label>Username</label>
+        @Html.TextBoxFor(i => i.UserName, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <label>Password</label>
+        @Html.PasswordFor(i => i.Password, new { @class = "form-control" })
+    </div>
+
+    <button class="btn btn-primary" type="submit">Login</button>
+    <a href="/Account/Register" class="btn btn-primary">Register</a>
+    <a href="/Account/ForgotPassword" class="btn btn-link">Forgot Password?</a>
+
+    if (TempData["Success"] != null && (bool)TempData["Success"] == true)
+    {
+        <script>
+    // Show popup when password reset is successful
+            alert('Password has been changed successfully!');</script>
+    }
+}
+

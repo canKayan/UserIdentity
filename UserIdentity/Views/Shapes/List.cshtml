@@ -1,0 +1,54 @@
+﻿@model IEnumerable<UserIdentity.Models.Shape>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+
+<h1>Product List</h1>
+<hr>
+<hr />
+
+@Html.ValidationSummary()
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Product Information</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr class="text-center">
+                    <th>@Html.DisplayName("Name")</th>
+                    <th>@Html.DisplayName("Side Length 1")</th>
+                    <th>@Html.DisplayName("Side Length 2")</th>
+                    >
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="text-center">
+                        <td>@item.ShapeName</td>
+                        <td>@item.SideLength1</td>
+                        <td>
+                            @item.SideLength2
+                        </td>
+
+                        <td>
+                            @using (Html.BeginForm("Delete", "CRUD", FormMethod.Post, new { @id = "deleteForm-" + item.Id }))
+                            {
+
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
+                                @Html.Hidden("id", item.Id) <!-- Hidden input to pass product ID -->
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            }
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

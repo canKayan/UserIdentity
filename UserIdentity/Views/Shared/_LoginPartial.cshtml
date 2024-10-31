@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "_LoginPartial";
+}
+
+@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+<ul class="nav navbar-nav navbar-right">
+    <li style="margin-right: 10px;">
+        @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+    </li>
+    <li style="margin-right: 10px;">
+        @Html.ActionLink("Log Off", "Logout", "Account")
+    </li>
+    <li>
+        @Html.ActionLink("Reset Password", "PasswordReset", "Account")
+    </li>
+</ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li style="margin-right: 10px;">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}
+
