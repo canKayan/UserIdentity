@@ -41,6 +41,7 @@ namespace UserIdentity.Controllers
             };
         }
         // GET: Account
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View();
